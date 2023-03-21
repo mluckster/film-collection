@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>
+    Film Collection List:
+    <br>
+</h1>
+
+{% for film in  films%}
+<p>
+    Film name: {{ film.title }}
+</p>
+<p>
+    Release Year: {{ film.release_year }}
+</p>
+<p>
+    Director: {{ film.director }}
+</p>
+
+
+{% endfor %}
+
+{% endblock %}
