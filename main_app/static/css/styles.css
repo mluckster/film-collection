@@ -1,3 +1,8 @@
 body {
-    background-color: rgb(94, 55, 55);
+    background-color: rgb(128, 99, 99);
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }

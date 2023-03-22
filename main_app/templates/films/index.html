@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>
-    Film Collection List:
-    <br>
-</h1>
 
-{% for film in  films%}
-<p>
-    Film name: {{ film.title }}
-</p>
-<p>
-    Release Year: {{ film.release_year }}
-</p>
-<p>
-    Director: {{ film.director }}
-</p>
-
-
-{% endfor %}
+<div class="container">
+    <h1>
+        Film Collection List:
+        <br>
+    </h1>
+    
+    {% for film in  films%}
+    <a href="{% url 'film_detail' film.id %}" class="card">
+        <div class="card-panel col s12 purple lighten-3 hoverable black-text">
+            <h5 class="black-text">{{ film.title }}</h3>
+                <a href="{% url 'film_update' film.id %}" class="waves-effect waves-light btn-small">Update Info</a>
+            <a href="{% url 'film_delete' film.id %}" class="waves-effect waves-light btn-small">DELETE THIS</a>
+        </div>
+    </a>
+    {% endfor %}
+</div>
 
 {% endblock %}
