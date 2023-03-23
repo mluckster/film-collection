@@ -3,10 +3,42 @@
 
 <div class="container">
     <div class="card-panel col s12 red lighten-3">
-        <h2>{{ film.title }}</h2>
+        <h2 class="center-align">{{ film.title }}</h2>
         <h5>{{ film.director }}</h5>
         <h5>{{ film.release_year }}</h5>
     </div>
+    <br>
+    {% if film.reviews_set.all %}
+        {% for review in film.reviews_set.all %}
+            <div class="card-panel blue lighten-2">
+            <h4>
+                Rating:  {{ review.get_rating_display }}
+            </h4>
+            <h6>
+                {{ review.body }}
+            </h6>
+            </div>   
+        {% endfor %}
+    {% else %}
+            <div class="card-panel blue lighten-2">
+                <h6 class="center-align bold">
+                    No reviews right now
+                </h6>
+            </div>
+    {% endif %}
+
+    <form action="{% url 'add_review' film.id %}" method="POST" class="black-text">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <input type="submit" class="btn-large black-text" value="Add Review!">
+    </form>
 </div>
+
+<script>
+    var selectEl = document.getElementById('id_rating');
+    M.FormSelect.init(selectEl);
+</script>
+
+<br><br><br>
 
 {% endblock %}

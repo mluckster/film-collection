@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>
-    Film Collection
-</h1>
+<div class="container">
+    <h1 class="center">
+        Film Collection
+    </h1>
 
-<br>
-<a href="{% url 'films_index' %}">Click here to view films in my collection</a>
-
+    <div class="center-align">
+        <a class="btn" href="{% url 'films_index' %}">Click here to view films in my collection</a>
+    </div>
+</div>
 
 {% endblock %}
-
-
-
-
-
-

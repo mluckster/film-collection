@@ -9,13 +9,21 @@
     </h1>
     
     {% for film in  films%}
-    <a href="{% url 'film_detail' film.id %}" class="card">
-        <div class="card-panel col s12 purple lighten-3 hoverable black-text">
-            <h5 class="black-text">{{ film.title }}</h3>
-                <a href="{% url 'film_update' film.id %}" class="waves-effect waves-light btn-small">Update Info</a>
-            <a href="{% url 'film_delete' film.id %}" class="waves-effect waves-light btn-small">DELETE THIS</a>
+    <div class="row">
+        <div class="col s12">
+            <div class="card purple lighten-3 hoverable" onclick='location.href = "{% url 'film_detail' film.id %}"'>
+                <div class="card-content black-text">
+                    <h5>{{ film.title }}</h5>
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'film_update' film.id %}" class="waves-effect waves-light btn-small">Update Info</a>
+                    <a href="{% url 'film_delete' film.id %}" class="waves-effect waves-light btn-small">DELETE THIS</a>
+                </div>
+            </div>
+
         </div>
-    </a>
+
+    </div>
     {% endfor %}
 </div>
 

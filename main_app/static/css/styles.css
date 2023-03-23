@@ -3,6 +3,14 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: black;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.hoverable:hover {
+    cursor: pointer;
 }
