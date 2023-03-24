@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
+<div class="container row">
     <div class="card-panel col s12 red lighten-3">
         <h2 class="center-align">{{ film.title }}</h2>
         <h5>{{ film.director }}</h5>
@@ -10,23 +10,49 @@
     <br>
     {% if film.reviews_set.all %}
         {% for review in film.reviews_set.all %}
-            <div class="card-panel blue lighten-2">
-            <h4>
-                Rating:  {{ review.get_rating_display }}
-            </h4>
-            <h6>
-                {{ review.body }}
-            </h6>
+            <div class="card-panel blue lighten-2 col s6">
+                <h4>
+                    Rating:  {{ review.get_rating_display }}
+                </h4>
+                <h6>
+                    {{ review.body }}
+                </h6>
             </div>   
         {% endfor %}
     {% else %}
-            <div class="card-panel blue lighten-2">
-                <h6 class="center-align bold">
-                    No reviews right now
-                </h6>
-            </div>
+        <div class="card-panel blue lighten-2 col s6">
+            <h6 class="center-align bold">
+                No reviews right now
+            </h6>
+        </div>
     {% endif %}
+        <div class="card-panel green lighten-3 col s6">
+            <h5>Actors in this Film:</h5>
+            {% for actor in film.actors.all %}
+            {{ actor }} <br>
+            {% endfor %}
+            <br>
+            <div class="btn-small hoverable" onclick='location.href = "{% url 'actor_create' %}"'>
+                Add Actor
+            </div> 
+            <br>
 
+            <form action="{% url 'assoc_actor' film.id %}" method="POST">
+                {% csrf_token %}
+                <label for="actor">Add actor to film:</label>
+                <select name="actor" id="actor">
+                    {% for actor in actors %}
+                        <option value="{{ actor.id }}">{{ actor }}</option>
+                    {% endfor %}
+                    </select>
+                    <input type="submit" value="Add" class="btn">
+                </form>
+            <br>
+        </div>
+</div>
+
+
+<div class="container">
     <form action="{% url 'add_review' film.id %}" method="POST" class="black-text">
         {% csrf_token %}
         {{ review_form.as_p }}
@@ -37,6 +63,11 @@
 <script>
     var selectEl = document.getElementById('id_rating');
     M.FormSelect.init(selectEl);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
 </script>
 
 <br><br><br>

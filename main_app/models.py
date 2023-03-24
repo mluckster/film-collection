@@ -17,10 +17,21 @@ RATINGS = [
     ('0', 'Zero Stars')
 ]
 
+class Actor(models.Model):
+    name = models.CharField(max_length=75)
+    dob = models.DateField()
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('film_detail', kwargs= { 'film_id': self.id })
+
 class Film(models.Model):
     title = models.CharField(max_length = 200)
     release_year = models.IntegerField()
     director = models.CharField(max_length = 100)
+    actors = models.ManyToManyField(Actor)
 
     def __str__(self):
         return self.title
@@ -38,3 +49,4 @@ class Reviews(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.get_rating_display()} for {self.film} review: {self.body}"
+    
