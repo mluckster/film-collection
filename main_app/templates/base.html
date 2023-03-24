@@ -17,8 +17,14 @@
     <div class="nav-wrapper purple lighten-3">
         <a href="#" class="brand-logo">Film Collection</a>
         <ul class="right">
-            <li><a href="{% url 'films_index' %}">View Films</a></li>
-            <li><a href="{% url 'films_create' %}">Add New Film</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'films_index' %}">View Films</a></li>
+                <li><a href="{% url 'films_create' %}">Add New Film</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
         <li><a href=""></a></li>
         </ul>
     </div>

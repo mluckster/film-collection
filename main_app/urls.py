@@ -11,5 +11,6 @@ urlpatterns = [
     path('film/<int:film_id>/add_review', views.add_review, name='add_review'),
     path('actors/create/', views.ActorCreate.as_view(), name="actor_create"),
     path('films/<int:film_id>/assoc_actor/', views.assoc_actor, name="assoc_actor"),
+    path('accounts/signup/', views.signup, name="signup"),
 
 ]
